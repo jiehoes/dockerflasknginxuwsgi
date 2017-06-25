@@ -7,3 +7,5 @@
 sudo docker build -t flaskwebpage .
 
 sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
+
+Credit to Thatcher Peskens (https://github.com/atupal/dockerfile.flask-uwsgi-nginx), who this code was forked from.
