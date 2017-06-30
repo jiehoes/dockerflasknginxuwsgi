@@ -22,9 +22,10 @@
   
   <br>
   
-  <li><b>Services</b></li>
+  <li><b>Services/Notes</b></li>
   <ul>
     <li>This script uses linux's Supervisor to monitor and control uwsgi and nginx.</li>
+    <li>Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"</li>
   </ul>  
   
   <br>
