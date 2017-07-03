@@ -5,9 +5,9 @@
 # sudo docker build -t flaskwebpage .
 # sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
 #
-# Letsencrypt certbot-auto installs automatically.  Once the container is built:
-#    - /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
-#    - In /home/flask/conf/nginx.conf, comment out the HTTP section and uncomment the HTTPS section, replacing "YOURDOMAIN" with your domain
+# Letsencrypt certbot-auto downloads automatically.  Once the container is built:
+#    - To run: /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
+#    - Update Nginx: In /home/flask/conf/nginx.conf, comment out the HTTP section and uncomment the HTTPS section, replacing "YOURDOMAIN" with your domain
 #
 # Forked from Thatcher Peskens <thatcher@dotcloud.com>
 #    github - https://github.com/atupal/dockerfile.flask-uwsgi-nginx
