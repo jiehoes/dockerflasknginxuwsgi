@@ -9,7 +9,7 @@
 #    - Run: 
 #        - /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
 #    - Update Nginx: In /home/flask/conf/nginx.conf, comment out the HTTP section and uncomment the HTTPS section, replacing "YOURDOMAIN" with your domain
-#    - Restart nginx
+#    - Test and restart nginx
 #
 # Forked from Thatcher Peskens <thatcher@dotcloud.com>
 #    github - https://github.com/atupal/dockerfile.flask-uwsgi-nginx
