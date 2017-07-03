@@ -1,4 +1,4 @@
-# Flask+Nginx+uwsgi Docker Container
+# Flask+Nginx+uwsgi Docker Container, including Letsencrypt's certbot-auto for HTTPS
 
 <b>Purpose:</b> Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage
 
