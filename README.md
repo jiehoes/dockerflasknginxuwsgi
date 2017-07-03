@@ -27,6 +27,14 @@
     <li>This script uses linux's Supervisor to monitor and control uwsgi and nginx.</li>
     <li>Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"</li>
   </ul>  
+
+  <br>
+
+  <li><b>HTTPS</b></li>
+  <ul>
+    <li>certbot is installed, by default, with the Dockerfile.  You can run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" manually or uncomment the command in the Dockerfile</li>
+    <li>Once the certs are installed, you need to adjust /home/flask/conf/nginx.conf to use HTTP, replacing YOURDOMAIN with your actualy domain.</li>
+  </ul>  
   
   <br>
   
