@@ -20,7 +20,7 @@ add . /home/flask/
 run apt-get update
 run apt-get install -y software-properties-common
 run add-apt-repository -y ppa:nginx/stable
-run apt-get install -y build-essential nano nginx python python-dev python-setuptools python-software-properties supervisor 
+run apt-get install -y build-essential nano nginx python python-dev python-setuptools python-software-properties supervisor wget
 
 # Install uwsgi and flask via the requirements.txt file
 run easy_install pip
