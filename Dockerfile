@@ -40,6 +40,7 @@ run chmod a+x /home/flask/certbot-auto
 
 #If you want to run certbot right away, you can uncomment the below, using your domain
 #YOU WILL HAVE TO UPDATE THE NGINX CONF LATER!
+#Use Option 2: Place files in a webroot directory (webroot)
 #/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
 
 
