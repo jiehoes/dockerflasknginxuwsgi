@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, redirect
 import sys, os, traceback
+current_directory = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__)
+
 
 @app.route("/") 
 @app.route("/index")
@@ -10,6 +12,35 @@ def index():
         return render_template('index.html')
     except:
         return get_exception()
+
+
+#Letsencrypt certbot
+@app.route('/.well-known/acme-challenge/<token_value>')
+def letsencrpyt(token_value):
+    try:
+        with open('{current_directory}/.well-known/acme-challenge/{token_value}'.format(current_directory=current_directory, token_value=token_value)) as f:
+            answer = f.readline().strip()
+        return str(answer)
+    except:
+        return get_exception()
+
+
+#Displays the 500 error
+@app.errorhandler(500)
+def get_500_error(error):
+    try:
+        return "500 error - %s" % (error)
+    except:
+        return get_exception()
+
+
+#Gets a client's IP address
+def get_client_ip():
+    'Gets client IP from xforward for or remote address if not proxied'
+    if request.headers.getlist("X-Forwarded-For"):
+        return request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        return request.remote_addr
 
 
 def get_exception():
@@ -29,12 +60,3 @@ Traceback:
                     error_message = exc_obj,
                     traceback = traceback.format_exc().replace(", in ",", in \n"),
                     )
-
-
-def get_client_ip():
-    'Gets client IP from xforward for or remote address if not proxied'
-    if request.headers.getlist("X-Forwarded-For"):
-        return request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        return request.remote_addr
-
