@@ -2,7 +2,7 @@
 
 <b>Purpose:</b> Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage
 
-<b>Why do I use it?:</b> See https://www.mattsvensson.com/new-blog/2017/6/30/docker-flasknginxuwsgi
+<b>Why do I use it?:</b> See https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 <b>Notes/Details:</b>
 <ul>
