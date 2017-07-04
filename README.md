@@ -8,6 +8,7 @@
 <ul>
   <li><b>Build and run the container</b></li>
   <ul>
+    <li>Clone this repo and go to into the folder (where the Dockerfile is)</li>
     <li>Build: sudo docker build -t flaskwebpage .</li>
     <li>Run: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage</li>
   </ul>
@@ -18,6 +19,7 @@
   <ul>
     <li>All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the files in /home/flask/conf as well</li>
     <li>The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed)</li>
+    <li>If you want to get shell on the container, run: function _fu(){ sudo docker exec -i -t flaskwebpage /bin/bash ; };_fu</li>
   </ul>
   
   <br>
