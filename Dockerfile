@@ -6,7 +6,7 @@
 # sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
 #
 # Letsencrypt certbot-auto downloads automatically.  Once the container is built:
-#    - Run: 
+#    - Run:
 #        - /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
 #    - Update Nginx: In /home/flask/conf/nginx.conf, comment out the HTTP section and uncomment the HTTPS section, replacing "YOURDOMAIN" with your domain
 #    - Test and restart nginx
