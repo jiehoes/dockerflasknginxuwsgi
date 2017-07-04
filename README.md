@@ -19,7 +19,6 @@
   <ul>
     <li>All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the files in /home/flask/conf as well</li>
     <li>The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed)</li>
-    <li>If you want to get shell on the container, run: function _fu(){ sudo docker exec -i -t flaskwebpage /bin/bash ; };_fu</li>
   </ul>
   
   <br>
@@ -28,7 +27,8 @@
   <ul>
     <li>This script uses linux's Supervisor to monitor and control uwsgi and nginx.</li>
     <li>Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"</li>
-  </ul>  
+    <li>If you want to get shell on the container, run: function _fu(){ sudo docker exec -i -t flaskwebpage /bin/bash ; };_fu</li>
+</ul>  
 
   <br>
 
