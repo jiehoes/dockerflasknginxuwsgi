@@ -1,4 +1,4 @@
-# Docker container for Flask, Nginx, and uwsgi, including Letsencrypt's certbot-auto for HTTPS
+# Docker container for Flask, Nginx, and uWSGI, including Letsencrypt's certbot-auto for HTTPS
 
 <b>Purpose:</b> Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage
 
@@ -25,7 +25,7 @@
   
   <li><b>Services/Notes</b></li>
   <ul>
-    <li>This script uses linux's Supervisor to monitor and control uwsgi and nginx.</li>
+    <li>This script uses linux's Supervisor to monitor and control uWSGI and nginx.</li>
     <li>Port 443 is left on the run command in case you want to use it.  If you never will, you can remove "-p 443:443"</li>
     <li>If you want to get shell on the container, run: function _fu(){ sudo docker exec -i -t flaskwebpage /bin/bash ; };_fu</li>
 </ul>  
