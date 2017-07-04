@@ -8,7 +8,7 @@
 <ul>
   <li><b>Build and run the container</b></li>
   <ul>
-    <li>Clone this repo and go to into the folder (where the Dockerfile is)</li>
+    <li>Clone this repo and go to into the "docker-flask-nginx-uwsgi" folder (where the Dockerfile is)</li>
     <li>Build: sudo docker build -t flaskwebpage .</li>
     <li>Run: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage</li>
   </ul>
