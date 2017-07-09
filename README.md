@@ -32,11 +32,16 @@
 
   <br>
 
-  <li><b>HTTPS</b></li>
+  <li><b>HTTPS Setup Options</b></li>
   <ul>
-    <li>certbot is installed, by default, with the Dockerfile.  To get certs from letsencrypt, in the container, run the following command, using authentication option 2 (Place files in a webroot directory):  /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app</li>
-    <li>Once the certs are installed, adjust /home/flask/conf/nginx.conf to use HTTPS, replacing YOURDOMAIN with your actual domain.</li>
-    <li>Test and restart Nginx</li>
+    <li>
+      Do it the easy way and run a command like one of the below to automate the setup
+      - ./setup-https.py -d test.com -n test.com -e test@test.com
+      - ./setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
+
+    </li>
+    
+    <li>Do it the hard way: Run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" and either adjust /home/flask/conf/nginx-http.conf to use HTTPS, replacing YOURDOMAIN with your actual domain, and test and restart Nginx</li>
   </ul>  
   
   <br>
