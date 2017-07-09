@@ -17,8 +17,11 @@
 
 from ubuntu:16.04
 
-# Add all local code to the docker container
+# Add all local code to the docker container and 
 add . /home/flask/
+
+#Change the HTTPS config scripts to executable
+run chmod +x /home/flask/conf/setup-https.py
 
 #Add latest nginx repo and install base programs
 run apt-get update
@@ -33,15 +36,15 @@ run pip install -r /home/flask/conf/requirements.txt
 #Update all the things
 run apt-get update && apt-get -y upgrade
 
-# Config all the things
+# Config all the things, inititally for HTTP, not HTTPS
 run rm /etc/nginx/sites-enabled/default
-run ln -s /home/flask/conf/nginx.conf /etc/nginx/sites-enabled/
+run ln -s /home/flask/conf/nginx-http.conf /etc/nginx/sites-enabled/
 run ln -s /home/flask/conf/supervisor.conf /etc/supervisor/conf.d/
 
 #Get Letsencrypt certbot
-run wget -O /home/flask/certbot-auto https://dl.eff.org/certbot-auto
-run chmod a+x /home/flask/certbot-auto
+run wget -O /home/flask/conf/certbot-auto https://dl.eff.org/certbot-auto
+run chmod a+x /home/flask/conf/certbot-auto
 
-# Expose both ports in case you want to start using 443
+# Expose both ports in case you want to start using HTTPS
 expose 80 443
 cmd ["supervisord", "-n"]
