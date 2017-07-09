@@ -1,6 +1,6 @@
 # Docker container for Flask, Nginx, and uWSGI, including Letsencrypt's certbot-auto for HTTPS
 
-<b>Purpose:</b> Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage
+<b>Purpose:</b> Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage, with a script to automate HTTPS re-configuration.
 
 <b>Why do I use it?:</b> See https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
@@ -34,11 +34,16 @@
 
   <li><b>HTTPS Setup Options</b></li>
   <ul>
-    <li>Do it the easy way and run a command like one of the below to automate the setup</li>
-      - ./setup-https.py -d test.com -n test.com -e test@test.com
+  <li><b>Do it the easy way</b> and run a command like one of the below to automate the setup via a custom script!</li>
+      - /home/ubuntu/docker-flask/conf/setup-https.py -d test.com -n test.com -e test@test.com
       <br>
-      - ./setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
-    <li>Do it the hard way: Run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" and either adjust /home/flask/conf/nginx-http.conf to use HTTPS, replacing YOURDOMAIN with your actual domain, and test and restart Nginx</li>
+      - /home/ubuntu/docker-flask/conf/setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
+    <li>Do it the hard way: 
+    - Run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" 
+    <br>
+    - Adjust /home/flask/conf/nginx-http.conf to use HTTPS or modify /home/flask/conf/nginx-https.conf, remove /etc/nginx/sites-enabled/nginx-http.conf, re-link ntinx-https.conf to /etc/nginx/sites-enabled 
+    <br>
+    - Test and restart nginx</li>
   </ul>  
   
   <br>
