@@ -38,6 +38,7 @@
       - /home/ubuntu/docker-flask/conf/setup-https.py -d test.com -n test.com -e test@test.com
       <br>
       - /home/ubuntu/docker-flask/conf/setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
+      <br>
     <li>Do it the hard way: 
     - Run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" 
     <br>
