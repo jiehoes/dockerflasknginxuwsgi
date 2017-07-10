@@ -28,7 +28,20 @@ args = parser.parse_args()
 ###################################################################
 current_dir = os.path.dirname(os.path.realpath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir,os.pardir))
+nginx_https_template_file = "{current_dir}/nginx-https-template.conf".format(current_dir=current_dir)
 nginx_https_file = "{current_dir}/nginx-https.conf".format(current_dir=current_dir)
+
+
+def remove_prior_folders(cert_name=args.cert_name):
+    'Removes all instances of this domain.  If not done, new folders like /etc/letsencrypt/live/test.com-0001/ will be created'
+    print_message("Removing any old folders to prevent any issues:")
+    command = "rm -rf /etc/letsencrypt/live/{cert_name}*".format(cert_name=cert_name)
+    output = get_command_output(command)
+    command = "rm -rf /etc/letsencrypt/archive/{cert_name}*".format(cert_name=cert_name)
+    output = get_command_output(command)
+    command = "rm -rf /etc/letsencrypt/renewal/{cert_name}*".format(cert_name=cert_name)
+    output = get_command_output(command)
+
 
 
 def get_cert(domain_names, cert_name, email_address):
@@ -36,7 +49,7 @@ def get_cert(domain_names, cert_name, email_address):
     command = '''{current_dir}/certbot-auto \
     certonly \
     --non-interactive \
-    --agree-tos --renew-by-default \
+    --agree-tos \
     --cert-name {cert_name} \
     --webroot -w {parent_dir}/app \
     --email {email_address} \
@@ -59,7 +72,11 @@ def configure_https(domain_names, cert_name):
     print_message("Reconfiguring nginx for https")
 
     print_message("Replacing 'YOURDOMAIN' with cert_name {cert_name} and domains {domain_names} in {nginx_https_file}".format(cert_name=cert_name, domain_names=domain_names, nginx_https_file=nginx_https_file))
-    for line in fileinput.input(nginx_https_file, inplace=1):
+
+    #Write the new nginx config file, keeping the template for future use
+    template_file = open(nginx_https_template_file, "r")
+    config_file = open(nginx_https_file, "w+")
+    for line in template_file:
         if "YOURDOMAIN" in line:
             #Add all domain names to the server_name field
             if "server_name" in line:
@@ -67,7 +84,9 @@ def configure_https(domain_names, cert_name):
             #Just add the cert_name to the cert path, e.g. /etc/letsencrypt/live/YOURDOMAIN/fullchain.pem
             elif "ssl_certificate" in line:
                 line = line.replace("YOURDOMAIN", cert_name)
-        print line.rstrip()
+        config_file.write(line)
+    template_file.close()
+    config_file.close()
 
     #Remove HTTP symbolic link
     command = "rm /etc/nginx/sites-enabled/nginx-http.conf"
@@ -78,6 +97,27 @@ def configure_https(domain_names, cert_name):
     command = "ln -s {nginx_https_file} /etc/nginx/sites-enabled/".format(nginx_https_file=nginx_https_file)
     print_message("Setting up symbolic link for HTTPS nginx config:\n\n{command}".format(command=command))
     output = get_command_output(command)
+
+
+def setup_cron_renew():
+    'If not already created for this domain, creates an auto nenew cronjob'
+    cron_command = '''1 0 * * * {current_dir}/certbot-auto renew --post-hook 'service supervisor restart' '''.format(current_dir=current_dir)
+    if cron_command_in_crontab(cron_command):
+        print_message("Auto-renew cronjob already setup")
+    else:
+        command = '''(crontab -l 2>/dev/null; echo "{cron_command}") | crontab -'''.format(cron_command=cron_command)
+        print_message("Setting up auto-renew cronjob:\n\n{command}".format(command=command))
+        output = get_command_output(command)
+
+
+def cron_command_in_crontab(cron_command):
+    'Checks to see if the cronjob is already in crontab'
+    command = "cat /var/spool/cron/crontabs/root"
+    output = get_command_output(command)
+    if cron_command in output:
+        return True
+    else:
+        return False
 
 
 def restart_supervisor():
@@ -107,8 +147,10 @@ def get_command_output(command):
 
 
 if __name__ == '__main__':
+    remove_prior_folders(cert_name=args.cert_name)
     if get_cert(domain_names=args.domains, cert_name=args.cert_name, email_address=args.email):
         configure_https(domain_names=args.domains, cert_name=args.cert_name)
+        setup_cron_renew()
         restart_supervisor()
     else:
         print_message("Letsencrypt cert was not successfully setup")
