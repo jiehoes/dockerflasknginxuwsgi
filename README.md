@@ -32,7 +32,7 @@
 
   <br>
 
-  <li><b>HTTPS Setup Options</b></li>
+  <li><b>HTTPS Setup Options (assumes 1 domain per container instance)</b></li>
   <ul>
   <li><b>Do it the easy way!</b> Go into the container and run a command like one of the below examples to automate the setup via a custom script I wrote.</li>
       - /home/ubuntu/docker-flask/conf/setup-https.py -d test.com -n test.com -e test@test.com
