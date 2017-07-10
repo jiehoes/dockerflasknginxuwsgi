@@ -43,7 +43,6 @@ def remove_prior_folders(cert_name=args.cert_name):
     output = get_command_output(command)
 
 
-
 def get_cert(domain_names, cert_name, email_address):
     'Attempts to get a cert through letsencrypt for the given domain and email'    
     command = '''{current_dir}/certbot-auto \
