@@ -43,7 +43,7 @@ See https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
     <br>
     - Adjust /home/flask/conf/nginx-http.conf to use HTTPS or modify /home/flask/conf/nginx-https.conf, remove /etc/nginx/sites-enabled/nginx-http.conf, re-link ntinx-https.conf to /etc/nginx/sites-enabled 
     <br>
-    - Test and restart nginx</li>
+    - Test and restart the supervisor service</li>
   </ul>  
   
   <br>
