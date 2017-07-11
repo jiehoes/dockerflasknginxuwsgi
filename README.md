@@ -10,15 +10,15 @@ With this container, you can get an HTTP server setup in 2 commands, HTTPS in 4!
 3. <b>Connect to the container (optional):</b> function _fu(){ sudo docker exec -i -t flaskwebpage /bin/bash ; };_fu
 4. <b>Setup HTTPS (optional):</b> /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
 
-## More details:
-See https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
+## More thoughts:
+https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
 ## Notes/Details:
 <ul>
   <li><b>Folder/File Sctructure</b></li>
   <ul>
-    <li>All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the files in /home/flask/conf as well</li>
-    <li>The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed)</li>
+    <li>All of the files+folders in this repo will be, by default, put into /home/flask.  If you modify this you need to update the Dockerfile.</li>
+    <li>The /home/flask/app folder will contain the Flask app.  As long as the wsgi.py file uses "app" not "application," you can swap in and out any flask app that you want (so long as you have the necessary libraries installed).</li>
   </ul>
   
   <br>
