@@ -20,7 +20,7 @@ def ip_address():
     try:
         from urllib2 import urlopen
         public_ip = urlopen('http://ipv4.icanhazip.com').read().strip()
-        container_ip = os.popen(''' ip addr show eth0 | grep "inet" | awk '{print $2}' | cut -d/ -f1 ''').read().strip()
+        container_ip = os.popen(''' ip addr show eth0 | grep "inet" | awk '{print $2}' | cut -d/ -f1 | cut -d$'\n' -f 1''').read().strip()
         return '''
 Public IP: {public_ip} <br>
 Container IP: {container_ip}
