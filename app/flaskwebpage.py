@@ -13,6 +13,21 @@ def index():
     except:
         return get_exception()
 
+    
+#Shows the public IP and etho0 IP of the machine (good for validation, e.g. load balancing)
+@app.route("/ip_address") 
+def ip_address():
+    try:
+        from urllib2 import urlopen
+        public_ip = urlopen('http://ipv4.icanhazip.com').read().strip()
+        container_ip = os.popen(''' ip addr show eth0 | grep "inet" | awk '{print $2}' | cut -d/ -f1 ''').read().strip()
+        return '''
+Public IP: {public_ip} <br>
+Container IP: {container_ip}
+'''.format(public_ip=public_ip, container_ip=container_ip)
+    except:
+        return get_exception()    
+    
 
 #Letsencrypt certbot
 @app.route('/.well-known/acme-challenge/<token_value>')
