@@ -146,17 +146,10 @@ def get_command_output(command):
 
 
 if __name__ == '__main__':
-    if args.domains and args.cert_name and args.email:
-        remove_prior_folders(cert_name=args.cert_name)
-        if get_cert(domain_names=args.domains, cert_name=args.cert_name, email_address=args.email):
-            configure_https(domain_names=args.domains, cert_name=args.cert_name)
-            setup_cron_renew()
-            restart_supervisor()
-        else:
-            print_message("Letsencrypt cert was not successfully setup")
+    remove_prior_folders(cert_name=args.cert_name)
+    if get_cert(domain_names=args.domains, cert_name=args.cert_name, email_address=args.email):
+        configure_https(domain_names=args.domains, cert_name=args.cert_name)
+        setup_cron_renew()
+        restart_supervisor()
     else:
-        print '''Need to provide all 3 arguments if you want to setup encryption, e.g.
-
-./setup-https.py -d test.com -n test.com -e test@test.com
-./setup-https.py -d test.com,www.test.com -n test.com -e test@test.com
-        '''
+        print_message("Letsencrypt cert was not successfully setup")
