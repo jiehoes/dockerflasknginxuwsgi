@@ -48,3 +48,5 @@ run chmod a+x /home/flask/conf/certbot-auto
 # Expose both ports in case you want to start using HTTPS
 expose 80 443
 cmd ["supervisord", "-n"]
+ENTRYPOINT ["/home/flask/conf/setup-https.py"]
+ 
