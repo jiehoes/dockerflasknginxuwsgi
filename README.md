@@ -10,6 +10,8 @@ With this container, you can get an HTTP server setup in 2 commands, HTTPS in 4 
 3. <b>Connect to the container (optional):</b> sudo docker exec -i -t flaskwebpage /bin/bash
 4. <b>Setup HTTPS (optional):</b> /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
 
+-NOTE: I will soon be adjusting the above commands to allow for executing setup-https.py via a ENTRYPOINT parameters in the "docker run" command.
+
 ## More thoughts:
 https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
 
