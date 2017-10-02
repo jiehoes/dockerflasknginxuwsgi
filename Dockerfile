@@ -1,15 +1,18 @@
 ###############################################################################################
 # Purpose:  Provide a Flask+nginx+uwsgi container on Ubuntu 16.04 via ports 80 and 443
 #
-# Build and Run:
+# Build:
 # sudo docker build -t flaskwebpage .
+#
+# Run HTTPS (adjusting the parameters, of course) QUOTES ARE REQUIRED:
+# sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage \ 
+# flaskwebpage "-d [example.com,www.example.com -n example.com -e my@email.com"
+#
+# Run HTTP:
 # sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage
 #
-# Letsencrypt certbot-auto downloads automatically.  Once the container is built:
-#    - Run:
-#        - /home/flask/certbot-auto certonly -d [domain] -w /home/flask/app
-#    - Update Nginx: In /home/flask/conf/nginx.conf, comment out the HTTP section and uncomment the HTTPS section, replacing "YOURDOMAIN" with your domain
-#    - Test and restart nginx
+# Setup HTTPS after starting the container as HTTP:
+#    - Run: /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
 #
 # Forked from Thatcher Peskens <thatcher@dotcloud.com>
 #    github - https://github.com/atupal/dockerfile.flask-uwsgi-nginx
@@ -47,4 +50,4 @@ run chmod a+x /home/flask/conf/certbot-auto
 
 # Expose both ports in case you want to start using HTTPS
 expose 80 443
-cmd ["supervisord", "-n"]
+ENTRYPOINT ["/home/flask/start.sh"]
