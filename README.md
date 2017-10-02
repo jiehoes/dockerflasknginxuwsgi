@@ -9,6 +9,7 @@ With this container, you can get an HTTP or HTTPS server setup in 1 commands! (+
 - HTTPS (change parameters): sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage "-d example.com,www.example.com -n example.com -e my@email.com" <br>
 
 Notes: 
+- It is also available on Docker Hub via ucnt/flaskwebpage if you don't want to build it yourself
 - If you arleady setupt he server as HTTP and you want HTTPS, run: /home/flask/conf/setup-https.py -d [domain_list_csv] -n [certname] -e [email_address]
 - You can access the container via: sudo docker exec -i -t flaskwebpage /bin/bash
 
