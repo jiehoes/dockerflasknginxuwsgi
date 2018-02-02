@@ -46,7 +46,7 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
       <br>
     - If you want to use Let's Encrpyt: Run "/home/flask/certbot-auto certonly -d [YOURDOMAIN] -w /home/flask/app" or else copy your existing certs to the folder of your choice.
       <br>
-    - Adjust /home/flask/conf/nginx-https-template.conf to use HTTPS by replacing YOURDOMAIN with the domain you are setting up and, if you copied a cert into a folder, changing the directory from /etc/letsencrpyt/live
+    - Adjust /home/flask/conf/nginx-https-template.conf to use HTTPS by replacing YOURDOMAIN with the domain you are setting up and, if you copied a cert into a folder, change the directory from /etc/letsencrpyt/live
       <br>
     - Remove /etc/nginx/sites-enabled/nginx-http.conf
       <br>
