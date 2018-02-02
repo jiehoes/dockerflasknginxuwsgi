@@ -45,7 +45,7 @@ https://www.mattsvensson.com/nerdings/2017/6/30/docker-flasknginxuwsgi
     <li>Do it the hard way: 
     - Run "/home/flask/certbot-auto certonly -d [domain] -w /home/flask/app" 
     <br>
-    - Adjust /home/flask/conf/nginx-http.conf to use HTTPS or modify /home/flask/conf/nginx-https.conf, remove /etc/nginx/sites-enabled/nginx-http.conf, re-link ntinx-https.conf to /etc/nginx/sites-enabled 
+    - Adjust /home/flask/conf/nginx-https-template.conf to use HTTPS, remove /etc/nginx/sites-enabled/nginx-http.conf, re-link ntinx-https.conf to /etc/nginx/sites-enabled 
     <br>
     - Test and restart the supervisor service</li>
   </ul>  
