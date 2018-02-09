@@ -4,7 +4,7 @@
 Provide Dockerfile and all applicable config and base Flask scripts necessary to start a webpage, with a script to automate HTTPS re-configuration.
 
 ## Why do I use it?:
-(Be sure docker is isntalled.  If not installed, run install_docker.sh) <br>
+(Be sure docker is installed.  If not installed, run install_docker.sh) <br>
 
 With this container and a built image (or pulling the image from ucnt/flaskwebpage), you can get an HTTP or HTTPS server setup in 1 commands
 - HTTP: sudo docker run -d -p 80:80 -p 443:443 --restart=always -t --name flaskwebpage flaskwebpage <br>
